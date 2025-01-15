@@ -26,7 +26,7 @@ class SimpleTsdfVisualizer {
   explicit SimpleTsdfVisualizer(const ros::NodeHandle& nh_private)
       : nh_private_(nh_private),
         tsdf_surface_distance_threshold_factor_(2.0),
-        tsdf_world_frame_("world"),
+        tsdf_world_frame_("global"),//world
         tsdf_mesh_color_mode_(ColorMode::kColor),
         tsdf_voxel_ply_output_path_("") {
     ROS_DEBUG_STREAM("\tSetting up ROS publishers...");

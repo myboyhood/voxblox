@@ -1,8 +1,28 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(voxblox)
 
-find_package(catkin_simple REQUIRED )
+find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
+
+# find_package(protobuf_catkin REQUIRED)
+# # 确保 protobuf_catkin 的库路径优先级更高
+# link_directories(${protobuf_catkin_LIBRARY_DIRS})
+
+# 强制查找动态库
+set(CMAKE_FIND_LIBRARY_SUFFIXES .so)  # 优先动态库
+set(PROTOBUF_USE_STATIC_LIBS OFF)    # 明确禁用静态库
+# 显式添加动态库路径
+# link_directories(/usr/lib/x86_64-linux-gnu)
+# link_directories(/opt/ros/melodic/lib/protobuf)
+find_package(Protobuf REQUIRED)
+message(STATUS "Found a suitable version of system protobuf: ${Protobuf_VERSION}")
+message(STATUS "PROTOBUF_LIBRARIES: ${PROTOBUF_LIBRARIES}")
+# message(STATUS "protobuf_catkin_INCLUDE_DIRS: ${protobuf_catkin_INCLUDE_DIRS}")
+# message(STATUS "protobuf_catkin_LIBRARY_DIRS: ${protobuf_catkin_LIBRARY_DIRS}")
+# message(STATUS "protobuf_catkin_LIBRARIES: ${protobuf_catkin_LIBRARIES}")
+message(STATUS "===== PROTOBUF_LIBRARIES: ${PROTOBUF_LIBRARIES}")
+
+include_directories(${Protobuf_INCLUDE_DIRS})
 
 set(CMAKE_MACOSX_RPATH 0)
 add_definitions(-std=c++11 -Wall -Wextra)
@@ -54,10 +74,19 @@ cs_add_library(${PROJECT_NAME}_proto
   ${PROTO_SRCS}
 )
 
+# 确保链接 protobuf_catkin 或者 系统的 Protobuf 库
+target_link_libraries(${PROJECT_NAME}_proto
+  /usr/lib/x86_64-linux-gnu/libprotobuf.so
+  -lpthread
+  # ${PROTOBUF_LIBRARIES}  # 添加 Protobuf 库
+)
+
 cs_add_library(${PROJECT_NAME}
   ${${PROJECT_NAME}_SRCS}
 )
-target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_proto)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_proto) # 添加 Protobuf 库
+
+
 
 ############
 # BINARIES #
@@ -67,11 +96,14 @@ add_executable(tsdf_to_esdf
   test/tsdf_to_esdf.cc
 )
 target_link_libraries(tsdf_to_esdf ${PROJECT_NAME})
+# target_link_libraries(tsdf_to_esdf ${PROJECT_NAME} ${PROTOBUF_LIBRARIES})  # 添加 Protobuf 库
+
 
 add_executable(test_load_esdf
   test/test_load_esdf.cc
 )
 target_link_libraries(test_load_esdf ${PROJECT_NAME})
+# target_link_libraries(test_load_esdf ${PROJECT_NAME} ${PROTOBUF_LIBRARIES})  # 添加 Protobuf 库
 
 #########
 # TESTS #

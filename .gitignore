@@ -33,6 +33,18 @@
 /Debug/
 .settings
 
+# Clion
+/voxblox/.idea
+/voxblox/cmake-build-debug
+/voxblox/build
+
+/voxblox_ros/.idea
+/voxblox_ros/cmake-build-debug
+/voxblox_ros/build
+
+/build
+/.vscode
+
 # Python (for lint)
 *.pyc
 

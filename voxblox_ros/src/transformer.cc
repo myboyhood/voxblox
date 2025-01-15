@@ -10,7 +10,7 @@ Transformer::Transformer(const ros::NodeHandle& nh,
                          const ros::NodeHandle& nh_private)
     : nh_(nh),
       nh_private_(nh_private),
-      world_frame_("world"),
+      world_frame_("global"),//world
       sensor_frame_(""),
       use_tf_transforms_(true),
       timestamp_tolerance_ns_(1000000) {

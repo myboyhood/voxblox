@@ -22,7 +22,7 @@ TsdfServer::TsdfServer(const ros::NodeHandle& nh,
     : nh_(nh),
       nh_private_(nh_private),
       verbose_(true),
-      world_frame_("world"),
+      world_frame_("global"),//world
       icp_corrected_frame_("icp_corrected"),
       pose_corrected_frame_("pose_corrected"),
       max_block_distance_from_body_(std::numeric_limits<FloatingPoint>::max()),

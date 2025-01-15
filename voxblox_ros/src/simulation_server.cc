@@ -72,7 +72,7 @@ SimulationServer::SimulationServer(
       nh_private_(nh_private),
       voxel_size_(tsdf_config.tsdf_voxel_size),
       voxels_per_side_(tsdf_config.tsdf_voxels_per_side),
-      world_frame_("world"),
+      world_frame_("global"),//world
       generate_occupancy_(false),
       visualize_(true),
       visualization_slice_level_(2.0),
