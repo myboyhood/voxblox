@@ -187,7 +187,10 @@ bool Transformer::lookupTransformQueue(const ros::Time& timestamp,
   // Transform should actually be T_G_C. So need to take it through the full
   // chain.
   *transform = T_G_D * T_B_D_.inverse() * T_B_C_;
-
+//  printf("T_G_D: position: %f %f %f, quat(xyzw): %f %f %f %f\n", T_G_D.getPosition().x(), T_G_D.getPosition().y(), T_G_D.getPosition().z(),
+//         T_G_D.getEigenQuaternion().x(), T_G_D.getEigenQuaternion().y(), T_G_D.getEigenQuaternion().z(), T_G_D.getEigenQuaternion().w());
+//  printf("transform: position: %f %f %f, quat(xyzw): %f %f %f %f\n", transform->getPosition().x(), transform->getPosition().y(), transform->getPosition().z(),
+//         transform->getEigenQuaternion().x(), transform->getEigenQuaternion().y(), transform->getEigenQuaternion().z(), transform->getEigenQuaternion().w());
   // And also clear the queue up to this point. This leaves the current
   // message in place.
   transform_queue_.erase(transform_queue_.begin(), it);

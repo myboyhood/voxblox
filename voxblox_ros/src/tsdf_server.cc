@@ -303,6 +303,9 @@ void TsdfServer::processPointCloudMessageAndInsert(
   }
 
   ros::WallTime start = ros::WallTime::now();
+  printf(">>>>>>>> T_G_C_refined pos: %f %f %f\n", T_G_C_refined.getPosition()[0], T_G_C_refined.getPosition()[1], T_G_C_refined.getPosition()[2]);
+  printf(">>>>>>>> T_G_C_refined quat(xyzw): %f %f %f %f\n", T_G_C_refined.getEigenQuaternion().x(), T_G_C_refined.getEigenQuaternion().y(),
+         T_G_C_refined.getEigenQuaternion().z(), T_G_C_refined.getEigenQuaternion().w());
   integratePointcloud(T_G_C_refined, points_C, colors, is_freespace_pointcloud);
   ros::WallTime end = ros::WallTime::now();
   if (verbose_) {
@@ -331,6 +334,7 @@ bool TsdfServer::getNextPointcloudFromQueue(
     return false;
   }
   *pointcloud_msg = queue->front();
+  printf("from frame: %s, to frame: %s\n", (*pointcloud_msg)->header.frame_id.c_str(), world_frame_.c_str());
   if (transformer_.lookupTransform((*pointcloud_msg)->header.frame_id,
                                    world_frame_,
                                    (*pointcloud_msg)->header.stamp, T_G_C)) {
@@ -352,6 +356,8 @@ bool TsdfServer::getNextPointcloudFromQueue(
 
 void TsdfServer::insertPointcloud(
     const sensor_msgs::PointCloud2::Ptr& pointcloud_msg_in) {
+  printf("pointcloud_msg_in->header.stamp = %f, last_time = %f \n", pointcloud_msg_in->header.stamp.toSec(),
+         last_msg_time_ptcloud_.toSec());
   if (pointcloud_msg_in->header.stamp - last_msg_time_ptcloud_ >
       min_time_between_msgs_) {
     last_msg_time_ptcloud_ = pointcloud_msg_in->header.stamp;
