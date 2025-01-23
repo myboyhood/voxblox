@@ -48,3 +48,6 @@ TSDF地图
 ESDF地图
 
   <img src="./mesh_results/voxblox-Paris-ESDF-2025-01-23-21-47-35.png" style="zoom:40%;">
+
+- Paris-Env实飞数据离线处理,生成mesh与TSDF和ESDF,由于运动幅度太小,远距离Mesh无法构建
+  <img src="./mesh_results/voxblox-Paris-Env-TSDF-2025-01-23_23-17-19.png" style="zoom:40%;">
