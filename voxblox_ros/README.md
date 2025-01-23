@@ -6,6 +6,7 @@
 - **点云数据**:可以是XYZRGB,XYZI,XYZ格式的点云数据,话题对应launch中`pointcloud`. 是采用ENU的表示法的相机坐标系下的点云位置,frame_id是自由命名,比如"point_cloud_link"
 - **位姿数据**:相机的位姿,消息类型`geometry_msgs::TransformStamped`,话题对应launch中`transform`. 
 是采用ENU的表示法的世界坐标系下的位姿,frame_id是和launch文件中`world_frame`保持一致,比如`world`. `child_frame_id`自由命名,比如"camera_link"
+**位姿的四元数一定要归一化再输入,否则会内部转化时报错!**
 
 # 样例程序
 - 使用Gazebo仿真,采用iris模型,加载深度和彩色摄像头,发布深度,彩色和位姿数据
@@ -32,3 +33,18 @@ TSDF地图
 ESDF地图
 
   <img src="./mesh_results/Gazebo-building-ESDF-2025-01-20_21-21-21.png" style="zoom:40%;">
+
+- Paris实飞数据离线处理,生成mesh与TSDF和ESDF
+
+Mesh
+
+  <img src="./mesh_results/voxblox-Paris-Mesh-2025-01-23_21-45-31.png" style="zoom:40%;">
+
+
+TSDF地图
+  
+  <img src="./mesh_results/voxblox-Paris-TSDF-2025-01-23 21-48-16.png" style="zoom:40%;">
+
+ESDF地图
+
+  <img src="./mesh_results/voxblox-Paris-ESDF-2025-01-23-21-47-35.png" style="zoom:40%;">

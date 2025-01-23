@@ -28,7 +28,7 @@
   </node> -->
 
   <node name="voxblox_node" pkg="voxblox_ros" type="esdf_server" output="screen" args="-alsologtostderr" clear_params="true">
-    <remap from="pointcloud" to="/pointcloud_dense_gt"/> <!--input pointcloud-->
+    <remap from="pointcloud" to="/pointcloud_dense_in_cam"/> <!--input pointcloud for gazebo /pointcloud_dense_gt  for paris /pointcloud_dense_in_cam -->
     <remap from="freespace_pointcloud" to="/xxxxx_pointcloud_dense"/>
     <param name="use_freespace_pointcloud" value="false" />
     <param name="tsdf_voxel_size" value="$(arg voxel_size)" />

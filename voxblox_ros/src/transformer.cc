@@ -147,6 +147,7 @@ bool Transformer::lookupTransformQueue(const ros::Time& timestamp,
     }
   }
 
+  printf("lookupTransformQueue match_found = %d\n", match_found);
   // Match found basically means an exact match.
   Transformation T_G_D;
   if (match_found) {
