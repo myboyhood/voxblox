@@ -55,7 +55,7 @@
 .DS_Store
 
 # Mesh results
-mesh_results
+# mesh_results
 
 # Tools
 autolintc

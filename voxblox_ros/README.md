@@ -26,28 +26,44 @@ roslaunch voxblox_ros sjtu_pairs_dataset.launch
 # 重建效果展示
 - Gazebo真值点云和位姿生成mesh与TSDF和ESDF
 
-TSDF地图
+  TSDF地图
 
   <img src="./mesh_results/Gazebo-building-TSDF-2025-01-20_21-21-13.png" style="zoom:40%;">
 
-ESDF地图
+  ESDF地图
 
   <img src="./mesh_results/Gazebo-building-ESDF-2025-01-20_21-21-21.png" style="zoom:40%;">
 
 - Paris实飞数据离线处理,生成mesh与TSDF和ESDF
 
-Mesh
+  Mesh
 
   <img src="./mesh_results/voxblox-Paris-Mesh-2025-01-23_21-45-31.png" style="zoom:40%;">
 
 
-TSDF地图
+  TSDF地图
   
   <img src="./mesh_results/voxblox-Paris-TSDF-2025-01-23 21-48-16.png" style="zoom:40%;">
 
-ESDF地图
+  ESDF地图
 
   <img src="./mesh_results/voxblox-Paris-ESDF-2025-01-23-21-47-35.png" style="zoom:40%;">
 
-- Paris-Env实飞数据离线处理,生成mesh与TSDF和ESDF,由于运动幅度太小,远距离Mesh无法构建
-  <img src="./mesh_results/voxblox-Paris-Env-TSDF-2025-01-23_23-17-19.png" style="zoom:40%;">
+- Paris-Env-240529-best-v2-实飞数据离线处理,生成mesh与TSDF和ESDF.
+  <img src="./mesh_results/voxblox-Paris-2025-01-24_19-41-33.png" style="zoom:20%;">
+
+  - [视频: 连续多帧生成Mesh与TSDF过程](./mesh_results/voxblox-Paris-Env-multi-frames-2025-01-24_19.44.34.mp4)
+  - [视频: 多角度查看Mesh](./mesh_results/voxblox-Paris-Env-multi-view-2025-01-24_19.39.26.mp4)
+
+- Paris-Env实飞数据离线处理,生成mesh与TSDF和ESDF.
+  
+  - 如果采用的dense取样是5px,那么远距离Mesh所需要的点太稀疏,导致无法构建
+  
+  <img src="./mesh_results/voxblox-Paris-Env-TSDF-5px-2025-01-23_23-17-19.png" style="zoom:40%;">
+
+  - 如果采用的dense取样是2px,那么远距离Mesh所需要的点才足够构建
+  
+  <img src="./mesh_results/voxblox-Paris-Env-TSDF-2px-2025-01-24_09-51-05.png" style="zoom:40%;">
+
+  <img src="./mesh_results/voxblox-Paris-Env-ESDF-2px-2025-01-24_09-51-18.png" style="zoom:40%;">
+
